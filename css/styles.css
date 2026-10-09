@@ -1,0 +1,2611 @@
+/* ==========================================================================
+   NutriScan AI - Design System & Modern Health-Tech Stylesheet
+   ========================================================================== */
+
+/* --------------------------------------------------------------------------
+   Color Tokens & Variables (Dark Mode Default + Clean Light Mode)
+   -------------------------------------------------------------------------- */
+:root {
+  /* Color Palette - Vibrant Health-Tech */
+  --emerald-500: #10b981;
+  --emerald-400: #34d399;
+  --emerald-600: #059669;
+  --emerald-glow: rgba(16, 185, 129, 0.25);
+
+  --amber-500: #f59e0b;
+  --amber-400: #fbbf24;
+  --amber-600: #d97706;
+  --amber-glow: rgba(245, 158, 11, 0.25);
+
+  --cyan-500: #06b6d4;
+  --cyan-400: #22d3ee;
+  --cyan-glow: rgba(6, 182, 212, 0.25);
+
+  --purple-500: #8b5cf6;
+  --purple-400: #a78bfa;
+  --purple-glow: rgba(139, 92, 246, 0.25);
+
+  --rose-500: #f43f5e;
+  --rose-glow: rgba(244, 63, 94, 0.2);
+
+  /* Dark Theme Tokens (Default) */
+  --bg-primary: #090d16;
+  --bg-secondary: #0f172a;
+  --bg-tertiary: #172033;
+  --bg-elevated: #1e293b;
+  --bg-glass: rgba(15, 23, 42, 0.75);
+  --border-glass: rgba(255, 255, 255, 0.08);
+  --border-light: rgba(255, 255, 255, 0.12);
+  --border-accent: rgba(16, 185, 129, 0.3);
+
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-inverse: #090d16;
+
+  --card-bg: rgba(15, 23, 42, 0.8);
+  --card-bg-subtle: rgba(30, 41, 59, 0.6);
+  --card-border: rgba(255, 255, 255, 0.07);
+  --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.5), 0 0 1px 1px rgba(255, 255, 255, 0.05);
+  --card-hover-shadow: 0 20px 40px -15px rgba(16, 185, 129, 0.15), 0 0 1px 1px rgba(16, 185, 129, 0.3);
+
+  /* Radius & Transitions */
+  --radius-sm: 8px;
+  --radius-md: 14px;
+  --radius-lg: 20px;
+  --radius-xl: 28px;
+  --radius-full: 9999px;
+
+  --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-normal: 250ms cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: 400ms cubic-bezier(0.16, 1, 0.3, 1);
+
+  --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-display: 'Outfit', 'Inter', -apple-system, sans-serif;
+
+  --header-height: 72px;
+}
+
+/* Light Theme Variables */
+[data-theme="light"] {
+  --bg-primary: #f8fafc;
+  --bg-secondary: #ffffff;
+  --bg-tertiary: #f1f5f9;
+  --bg-elevated: #e2e8f0;
+  --bg-glass: rgba(255, 255, 255, 0.85);
+  --border-glass: rgba(0, 0, 0, 0.08);
+  --border-light: rgba(0, 0, 0, 0.1);
+  --border-accent: rgba(16, 185, 129, 0.4);
+
+  --text-primary: #0f172a;
+  --text-secondary: #475569;
+  --text-muted: #94a3b8;
+  --text-inverse: #f8fafc;
+
+  --card-bg: rgba(255, 255, 255, 0.95);
+  --card-bg-subtle: #f8fafc;
+  --card-border: rgba(0, 0, 0, 0.08);
+  --card-shadow: 0 10px 30px -10px rgba(0, 0, 0, 0.08), 0 0 1px 1px rgba(0, 0, 0, 0.04);
+  --card-hover-shadow: 0 20px 40px -15px rgba(16, 185, 129, 0.18), 0 0 1px 1px rgba(16, 185, 129, 0.35);
+}
+
+/* --------------------------------------------------------------------------
+   CSS Reset & Global Defaults
+   -------------------------------------------------------------------------- */
+*, *::before, *::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-family: var(--font-sans);
+  background-color: var(--bg-primary);
+  color: var(--text-primary);
+  scroll-behavior: smooth;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  overflow-x: hidden;
+  line-height: 1.5;
+  background-image: 
+    radial-gradient(circle at 15% 10%, rgba(16, 185, 129, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 85% 30%, rgba(139, 92, 246, 0.08) 0%, transparent 40%),
+    radial-gradient(circle at 50% 80%, rgba(245, 158, 11, 0.05) 0%, transparent 50%);
+  background-attachment: fixed;
+}
+
+img, video {
+  max-width: 100%;
+  height: auto;
+  display: block;
+}
+
+button, input, select, textarea {
+  font-family: inherit;
+  font-size: inherit;
+  color: inherit;
+  outline: none;
+}
+
+button {
+  cursor: pointer;
+  border: none;
+  background: none;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+.container {
+  width: 100%;
+  max-width: 1240px;
+  margin-left: auto;
+  margin-right: auto;
+  padding-left: 20px;
+  padding-right: 20px;
+}
+
+/* --------------------------------------------------------------------------
+   Typography
+   -------------------------------------------------------------------------- */
+h1, h2, h3, h4, h5, h6 {
+  font-family: var(--font-display);
+  font-weight: 700;
+  line-height: 1.2;
+  letter-spacing: -0.02em;
+}
+
+.gradient-text {
+  background: linear-gradient(135deg, #10b981 0%, #34d399 50%, #06b6d4 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+.gradient-text-ai {
+  background: linear-gradient(135deg, #8b5cf6 0%, #ec4899 50%, #f59e0b 100%);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+}
+
+/* --------------------------------------------------------------------------
+   Badges & Pills
+   -------------------------------------------------------------------------- */
+.badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 4px 12px;
+  border-radius: var(--radius-full);
+  font-size: 0.78rem;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.05em;
+}
+
+.badge-ai {
+  background: rgba(139, 92, 246, 0.15);
+  color: var(--purple-400);
+  border: 1px solid rgba(139, 92, 246, 0.3);
+}
+
+.badge-health {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--emerald-400);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.badge-warning {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--amber-400);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.badge-estimate {
+  background: rgba(6, 182, 212, 0.12);
+  color: var(--cyan-400);
+  border: 1px solid rgba(6, 182, 212, 0.25);
+  font-size: 0.72rem;
+}
+
+/* Disclaimer Banner */
+.disclaimer-banner {
+  background: rgba(245, 158, 11, 0.08);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: var(--radius-md);
+  padding: 12px 16px;
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  color: var(--text-secondary);
+  font-size: 0.84rem;
+  line-height: 1.4;
+  margin: 16px 0;
+}
+
+.disclaimer-banner .disclaimer-icon {
+  flex-shrink: 0;
+  font-size: 1.25rem;
+}
+
+.disclaimer-banner strong {
+  color: var(--amber-400);
+}
+
+/* --------------------------------------------------------------------------
+   Navigation Bar
+   -------------------------------------------------------------------------- */
+.navbar {
+  position: sticky;
+  top: 0;
+  z-index: 100;
+  height: var(--header-height);
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-bottom: 1px solid var(--border-glass);
+  transition: all var(--transition-normal);
+}
+
+.nav-container {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  height: 100%;
+}
+
+.brand-logo {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-family: var(--font-display);
+  font-weight: 800;
+  font-size: 1.35rem;
+  letter-spacing: -0.03em;
+  color: var(--text-primary);
+}
+
+.brand-logo .logo-icon {
+  width: 38px;
+  height: 38px;
+  border-radius: 10px;
+  background: linear-gradient(135deg, #10b981, #06b6d4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: white;
+  box-shadow: 0 4px 15px var(--emerald-glow);
+}
+
+.nav-links {
+  display: flex;
+  align-items: center;
+  gap: 28px;
+  list-style: none;
+}
+
+.nav-links a {
+  font-size: 0.92rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  transition: color var(--transition-fast);
+  position: relative;
+  padding: 6px 0;
+}
+
+.nav-links a:hover,
+.nav-links a.active {
+  color: var(--emerald-400);
+}
+
+.nav-links a.active::after {
+  content: '';
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  width: 100%;
+  height: 2px;
+  background: var(--emerald-400);
+  border-radius: var(--radius-full);
+}
+
+.nav-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.icon-btn {
+  width: 40px;
+  height: 40px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  border: 1px solid var(--border-glass);
+  transition: all var(--transition-fast);
+  font-size: 1.1rem;
+}
+
+.icon-btn:hover {
+  background: var(--bg-elevated);
+  transform: translateY(-1px);
+  border-color: var(--border-accent);
+}
+
+.btn-primary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: linear-gradient(135deg, #10b981 0%, #059669 100%);
+  color: white;
+  font-weight: 600;
+  font-size: 0.92rem;
+  border-radius: var(--radius-full);
+  box-shadow: 0 4px 15px var(--emerald-glow);
+  transition: all var(--transition-fast);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 8px 25px var(--emerald-glow);
+  background: linear-gradient(135deg, #34d399 0%, #10b981 100%);
+}
+
+.btn-secondary {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 10px 20px;
+  background: var(--bg-tertiary);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.92rem;
+  border-radius: var(--radius-full);
+  border: 1px solid var(--border-light);
+  transition: all var(--transition-fast);
+}
+
+.btn-secondary:hover {
+  background: var(--bg-elevated);
+  border-color: var(--border-accent);
+  transform: translateY(-2px);
+}
+
+.btn-ai {
+  background: linear-gradient(135deg, #8b5cf6 0%, #7c3aed 100%);
+  color: white;
+  box-shadow: 0 4px 15px var(--purple-glow);
+}
+
+.btn-ai:hover {
+  background: linear-gradient(135deg, #a78bfa 0%, #8b5cf6 100%);
+  box-shadow: 0 8px 25px var(--purple-glow);
+}
+
+.mobile-menu-btn {
+  display: none;
+  font-size: 1.4rem;
+}
+
+/* --------------------------------------------------------------------------
+   Hero Section
+   -------------------------------------------------------------------------- */
+.hero {
+  padding: 60px 0 80px;
+  position: relative;
+  overflow: hidden;
+}
+
+.hero-grid {
+  display: grid;
+  grid-template-columns: 1.15fr 0.95fr;
+  align-items: center;
+  gap: 50px;
+}
+
+.hero-content {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.hero-tag {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 6px 14px;
+  background: rgba(16, 185, 129, 0.1);
+  border: 1px solid rgba(16, 185, 129, 0.25);
+  border-radius: var(--radius-full);
+  color: var(--emerald-400);
+  font-size: 0.85rem;
+  font-weight: 600;
+  width: fit-content;
+}
+
+.hero-title {
+  font-size: clamp(2.5rem, 5vw, 4rem);
+  font-weight: 800;
+  line-height: 1.1;
+  letter-spacing: -0.03em;
+}
+
+.hero-desc {
+  font-size: 1.12rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  max-width: 540px;
+}
+
+.hero-cta-group {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-top: 10px;
+}
+
+.trust-indicators {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 24px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-glass);
+}
+
+.trust-item {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.82rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+}
+
+.trust-icon {
+  font-size: 1.1rem;
+}
+
+/* Hero Visual / Futuristic Food Plate */
+.hero-visual {
+  position: relative;
+  display: flex;
+  justify-content: center;
+}
+
+.plate-container {
+  position: relative;
+  width: 100%;
+  max-width: 480px;
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: 0 25px 60px -15px rgba(0, 0, 0, 0.7), 0 0 0 1px var(--card-border);
+  background: var(--bg-secondary);
+}
+
+.hero-food-img {
+  width: 100%;
+  height: 420px;
+  object-fit: cover;
+  transition: transform var(--transition-slow);
+}
+
+.plate-container:hover .hero-food-img {
+  transform: scale(1.03);
+}
+
+/* Futuristic Scanning HUD Overlay on Hero */
+.hero-scan-overlay {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+  border-radius: var(--radius-xl);
+}
+
+.hero-laser-line {
+  position: absolute;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: linear-gradient(90deg, transparent, #10b981, #06b6d4, #10b981, transparent);
+  box-shadow: 0 0 15px #10b981, 0 0 30px #06b6d4;
+  animation: heroScanLaser 3.5s ease-in-out infinite alternate;
+}
+
+@keyframes heroScanLaser {
+  0% { top: 8%; opacity: 0.3; }
+  50% { opacity: 0.9; }
+  100% { top: 92%; opacity: 0.3; }
+}
+
+.scan-target-box {
+  position: absolute;
+  top: 25%;
+  left: 20%;
+  width: 60%;
+  height: 50%;
+  border: 1px dashed rgba(16, 185, 129, 0.4);
+  border-radius: 12px;
+}
+
+.corner-reticle {
+  position: absolute;
+  width: 12px;
+  height: 12px;
+  border: 2px solid var(--emerald-400);
+}
+.corner-tl { top: -2px; left: -2px; border-right: none; border-bottom: none; }
+.corner-tr { top: -2px; right: -2px; border-left: none; border-bottom: none; }
+.corner-bl { bottom: -2px; left: -2px; border-right: none; border-top: none; }
+.corner-br { bottom: -2px; right: -2px; border-left: none; border-top: none; }
+
+/* Floating AI Result Chips */
+.floating-stat-card {
+  position: absolute;
+  background: var(--card-bg);
+  backdrop-filter: blur(12px);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.3);
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: floatStat 4s ease-in-out infinite alternate;
+}
+
+.stat-card-1 {
+  top: 15px;
+  left: -20px;
+}
+
+.stat-card-2 {
+  bottom: 25px;
+  right: -15px;
+  animation-delay: 2s;
+}
+
+@keyframes floatStat {
+  0% { transform: translateY(0px); }
+  100% { transform: translateY(-8px); }
+}
+
+.stat-icon-wrap {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-sm);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1rem;
+}
+
+.stat-card-1 .stat-icon-wrap { background: var(--amber-glow); color: var(--amber-400); }
+.stat-card-2 .stat-icon-wrap { background: var(--emerald-glow); color: var(--emerald-400); }
+
+.stat-info-title {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.stat-info-val {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   Section Layouts & Headers
+   -------------------------------------------------------------------------- */
+.section {
+  padding: 70px 0;
+  position: relative;
+}
+
+.section-header {
+  text-align: center;
+  max-width: 680px;
+  margin: 0 auto 40px;
+}
+
+.section-tag {
+  display: inline-block;
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--emerald-400);
+  text-transform: uppercase;
+  letter-spacing: 0.1em;
+  margin-bottom: 8px;
+}
+
+.section-title {
+  font-size: clamp(1.8rem, 3.5vw, 2.6rem);
+  font-weight: 800;
+  letter-spacing: -0.02em;
+  margin-bottom: 12px;
+}
+
+.section-desc {
+  font-size: 1rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+}
+
+/* --------------------------------------------------------------------------
+   Food Scanner Component
+   -------------------------------------------------------------------------- */
+.scanner-card {
+  background: var(--card-bg);
+  backdrop-filter: blur(16px);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  box-shadow: var(--card-shadow);
+  padding: 32px;
+  position: relative;
+  overflow: hidden;
+}
+
+.scanner-options-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 20px;
+}
+
+.scanner-option-box {
+  background: var(--bg-tertiary);
+  border: 2px dashed var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 36px 24px;
+  text-align: center;
+  cursor: pointer;
+  transition: all var(--transition-normal);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 240px;
+  position: relative;
+}
+
+.scanner-option-box:hover,
+.scanner-option-box.drag-over {
+  border-color: var(--emerald-400);
+  background: rgba(16, 185, 129, 0.05);
+  transform: translateY(-2px);
+}
+
+.option-icon-large {
+  width: 64px;
+  height: 64px;
+  border-radius: var(--radius-md);
+  background: var(--bg-elevated);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2rem;
+  margin-bottom: 16px;
+  color: var(--emerald-400);
+  transition: transform var(--transition-fast);
+}
+
+.scanner-option-box:hover .option-icon-large {
+  transform: scale(1.1);
+  background: var(--emerald-glow);
+}
+
+.option-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+  margin-bottom: 6px;
+}
+
+.option-desc {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  max-width: 240px;
+}
+
+.file-input-hidden {
+  display: none;
+}
+
+/* Sample Quick Picks Row */
+.sample-presets-wrap {
+  margin-top: 28px;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-glass);
+}
+
+.sample-title {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  margin-bottom: 14px;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.sample-chips-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sample-chip {
+  display: inline-flex;
+  align-items: center;
+  gap: 8px;
+  padding: 8px 14px;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-size: 0.85rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.sample-chip:hover {
+  background: var(--bg-elevated);
+  border-color: var(--emerald-400);
+  transform: translateY(-1px);
+}
+
+.sample-chip img {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  object-fit: cover;
+}
+
+/* Active Image Preview Card */
+.preview-card {
+  display: none;
+  grid-template-columns: 1fr 1.2fr;
+  gap: 30px;
+  align-items: center;
+}
+
+.preview-media-container {
+  position: relative;
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  max-height: 380px;
+  background: #000;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+}
+
+.preview-img {
+  width: 100%;
+  height: 320px;
+  object-fit: cover;
+}
+
+.preview-overlay-active {
+  position: absolute;
+  inset: 0;
+  pointer-events: none;
+}
+
+.preview-controls {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.preview-heading {
+  font-size: 1.5rem;
+  font-weight: 700;
+}
+
+.preview-meta-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.preview-actions-row {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 12px;
+}
+
+/* Live Camera Modal / Viewport */
+.camera-modal {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.85);
+  backdrop-filter: blur(10px);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.camera-modal.active {
+  display: flex;
+}
+
+.camera-container {
+  position: relative;
+  width: 100%;
+  max-width: 560px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  border: 1px solid var(--border-light);
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.8);
+}
+
+.camera-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 16px 20px;
+  background: var(--bg-tertiary);
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.camera-video-wrap {
+  position: relative;
+  width: 100%;
+  height: 380px;
+  background: #000;
+}
+
+.camera-video {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.camera-overlay-reticle {
+  position: absolute;
+  top: 15%;
+  left: 15%;
+  width: 70%;
+  height: 70%;
+  border: 2px dashed rgba(16, 185, 129, 0.6);
+  border-radius: 16px;
+  pointer-events: none;
+}
+
+.camera-controls-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 20px;
+  background: var(--bg-tertiary);
+}
+
+.shutter-btn {
+  width: 68px;
+  height: 68px;
+  border-radius: var(--radius-full);
+  background: white;
+  border: 4px solid var(--emerald-500);
+  box-shadow: 0 0 20px var(--emerald-glow);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  transition: transform var(--transition-fast);
+}
+
+.shutter-btn:hover {
+  transform: scale(1.06);
+}
+
+.shutter-inner {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-full);
+  background: var(--emerald-500);
+}
+
+/* --------------------------------------------------------------------------
+   AI Analysis Stepped HUD Screen
+   -------------------------------------------------------------------------- */
+.analysis-screen {
+  display: none;
+  padding: 40px 20px;
+  text-align: center;
+}
+
+.analysis-hud {
+  max-width: 500px;
+  margin: 0 auto;
+  position: relative;
+}
+
+.scanner-reticle-circle {
+  width: 140px;
+  height: 140px;
+  margin: 0 auto 24px;
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.reticle-ring {
+  position: absolute;
+  inset: 0;
+  border-radius: var(--radius-full);
+  border: 2px dashed var(--emerald-400);
+  animation: rotateRing 8s linear infinite;
+}
+
+.reticle-ring-inner {
+  position: absolute;
+  inset: 15px;
+  border-radius: var(--radius-full);
+  border: 2px solid var(--purple-400);
+  animation: rotateRingReverse 6s linear infinite;
+}
+
+.ai-pulse-dot {
+  font-size: 2.5rem;
+  animation: pulseAi 1.5s ease-in-out infinite;
+}
+
+@keyframes rotateRing {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+@keyframes rotateRingReverse {
+  from { transform: rotate(360deg); }
+  to { transform: rotate(0deg); }
+}
+
+@keyframes pulseAi {
+  0%, 100% { transform: scale(0.9); opacity: 0.8; }
+  50% { transform: scale(1.15); opacity: 1; }
+}
+
+.analysis-status-text {
+  font-size: 1.4rem;
+  font-weight: 700;
+  margin-bottom: 24px;
+  font-family: var(--font-display);
+}
+
+.analysis-stepper-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  text-align: left;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+}
+
+.analysis-step-item {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  font-size: 0.92rem;
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+}
+
+.analysis-step-item.active {
+  color: var(--text-primary);
+  font-weight: 600;
+}
+
+.analysis-step-item.done {
+  color: var(--emerald-400);
+}
+
+.step-status-icon {
+  width: 22px;
+  height: 22px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.8rem;
+  background: var(--bg-elevated);
+  border: 1px solid var(--border-light);
+}
+
+.analysis-step-item.active .step-status-icon {
+  border-color: var(--purple-400);
+  color: var(--purple-400);
+  animation: spinStep 1s linear infinite;
+}
+
+.analysis-step-item.done .step-status-icon {
+  background: var(--emerald-500);
+  border-color: var(--emerald-500);
+  color: white;
+}
+
+@keyframes spinStep {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+/* --------------------------------------------------------------------------
+   Results Section & Nutrition Dashboard
+   -------------------------------------------------------------------------- */
+.results-container {
+  display: none;
+}
+
+.results-grid-top {
+  display: grid;
+  grid-template-columns: 1fr 1.35fr;
+  gap: 30px;
+  margin-bottom: 30px;
+}
+
+/* Food Identity Card */
+.food-identity-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+.food-result-img-wrap {
+  position: relative;
+  height: 240px;
+  overflow: hidden;
+}
+
+.food-result-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.food-confidence-badge {
+  position: absolute;
+  top: 14px;
+  right: 14px;
+  background: rgba(15, 23, 42, 0.85);
+  backdrop-filter: blur(8px);
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  border: 1px solid rgba(139, 92, 246, 0.4);
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--purple-400);
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.food-identity-body {
+  padding: 24px;
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  flex: 1;
+}
+
+.food-title-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.food-detected-title {
+  font-size: 1.45rem;
+  font-weight: 800;
+  line-height: 1.2;
+}
+
+.edit-food-btn {
+  padding: 6px 12px;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+  white-space: nowrap;
+}
+
+.edit-food-btn:hover {
+  background: var(--bg-elevated);
+  color: var(--emerald-400);
+  border-color: var(--emerald-400);
+}
+
+.detected-components-wrap {
+  margin-top: 4px;
+}
+
+.components-label {
+  font-size: 0.8rem;
+  font-weight: 700;
+  text-transform: uppercase;
+  color: var(--text-muted);
+  letter-spacing: 0.05em;
+  margin-bottom: 8px;
+}
+
+.ingredient-tags-list {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+}
+
+.ingredient-tag {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  padding: 5px 10px;
+  border-radius: var(--radius-sm);
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.ingredient-tag .tag-dot {
+  width: 6px;
+  height: 6px;
+  border-radius: var(--radius-full);
+  background: var(--emerald-400);
+}
+
+/* Portion Size Controller Card */
+.portion-controller-card {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  margin-top: auto;
+}
+
+.portion-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 12px;
+}
+
+.portion-label {
+  font-size: 0.88rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.portion-input-group {
+  display: grid;
+  grid-template-columns: auto 1fr auto 1.3fr;
+  align-items: center;
+  gap: 8px;
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 6px;
+}
+
+.portion-step-btn {
+  width: 36px;
+  height: 36px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-tertiary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 1.1rem;
+  transition: all var(--transition-fast);
+}
+
+.portion-step-btn:hover {
+  background: var(--emerald-500);
+  color: white;
+}
+
+.portion-number-input {
+  width: 100%;
+  text-align: center;
+  font-size: 1.2rem;
+  font-weight: 800;
+  font-family: var(--font-display);
+  background: transparent;
+  border: none;
+  color: var(--text-primary);
+}
+
+.portion-unit-select {
+  padding: 8px 12px;
+  border-radius: var(--radius-sm);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  color: var(--text-primary);
+  font-weight: 600;
+  font-size: 0.88rem;
+  cursor: pointer;
+}
+
+.portion-scale-presets {
+  display: flex;
+  gap: 6px;
+  margin-top: 10px;
+}
+
+.scale-preset-btn {
+  flex: 1;
+  padding: 5px 8px;
+  font-size: 0.76rem;
+  font-weight: 600;
+  border-radius: var(--radius-sm);
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-glass);
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.scale-preset-btn:hover,
+.scale-preset-btn.active {
+  background: var(--emerald-500);
+  color: white;
+  border-color: var(--emerald-500);
+}
+
+.recalc-notification {
+  font-size: 0.78rem;
+  color: var(--emerald-400);
+  text-align: right;
+  margin-top: 6px;
+  min-height: 16px;
+  transition: opacity var(--transition-fast);
+}
+
+/* --------------------------------------------------------------------------
+   Nutrition Overview Card
+   -------------------------------------------------------------------------- */
+.nutrition-overview-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+}
+
+.calories-hero-banner {
+  background: linear-gradient(135deg, rgba(245, 158, 11, 0.12) 0%, rgba(245, 158, 11, 0.04) 100%);
+  border: 1px solid rgba(245, 158, 11, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 20px 24px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.calorie-val-group {
+  display: flex;
+  align-items: baseline;
+  gap: 8px;
+}
+
+.calorie-number {
+  font-size: clamp(2.5rem, 4vw, 3.5rem);
+  font-weight: 900;
+  font-family: var(--font-display);
+  color: var(--amber-400);
+  line-height: 1;
+}
+
+.calorie-unit {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--amber-500);
+}
+
+.calorie-target-percent {
+  text-align: right;
+}
+
+.target-pct-badge {
+  font-size: 1.25rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.target-pct-sub {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+/* Macronutrient Highlight Cards */
+.macro-cards-row {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+}
+
+.macro-card {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  position: relative;
+  overflow: hidden;
+  transition: transform var(--transition-fast);
+}
+
+.macro-card:hover {
+  transform: translateY(-2px);
+}
+
+.macro-card::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  height: 4px;
+}
+
+.macro-card.macro-protein::before { background: #3b82f6; }
+.macro-card.macro-carbs::before { background: #10b981; }
+.macro-card.macro-fat::before { background: #f59e0b; }
+
+.macro-header-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.macro-name {
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--text-secondary);
+}
+
+.macro-val-display {
+  display: flex;
+  align-items: baseline;
+  gap: 4px;
+}
+
+.macro-val-num {
+  font-size: 1.8rem;
+  font-weight: 800;
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.macro-val-unit {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+.macro-bar-track {
+  width: 100%;
+  height: 8px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.macro-bar-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width var(--transition-slow);
+}
+
+.macro-protein .macro-bar-fill { background: #3b82f6; }
+.macro-carbs .macro-bar-fill { background: #10b981; }
+.macro-fat .macro-bar-fill { background: #f59e0b; }
+
+.macro-sub-stat {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  font-size: 0.75rem;
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   Nutritional Breakdown Deep-Dive Grid
+   -------------------------------------------------------------------------- */
+.nutritional-deep-dive-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 20px;
+  margin-top: 10px;
+}
+
+.nutrient-card {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-lg);
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.nutrient-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.nutrient-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.nutrient-number-row {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.nutrient-number {
+  font-size: 2.2rem;
+  font-weight: 800;
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.nutrient-rating-badge {
+  padding: 4px 10px;
+  border-radius: var(--radius-full);
+  font-size: 0.76rem;
+  font-weight: 700;
+}
+
+.rating-good {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--emerald-400);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.rating-moderate {
+  background: rgba(6, 182, 212, 0.15);
+  color: var(--cyan-400);
+  border: 1px solid rgba(6, 182, 212, 0.3);
+}
+
+.rating-low {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--amber-400);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.nutrient-breakdown-list {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  padding: 12px;
+  font-size: 0.82rem;
+}
+
+.breakdown-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--text-secondary);
+}
+
+.breakdown-val {
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.breakdown-uncertain-note {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  font-style: italic;
+  margin-top: 4px;
+}
+
+.nutrient-insight-box {
+  background: rgba(16, 185, 129, 0.05);
+  border-left: 3px solid var(--emerald-400);
+  padding: 10px 14px;
+  border-radius: 0 var(--radius-sm) var(--radius-sm) 0;
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
+}
+
+/* Micronutrients Mini Pills Grid */
+.micronutrients-summary-row {
+  display: grid;
+  grid-template-columns: repeat(4, 1fr);
+  gap: 12px;
+  margin-top: 20px;
+}
+
+.micro-pill-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-md);
+  padding: 14px;
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.micro-pill-name {
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+  font-weight: 600;
+}
+
+.micro-pill-val {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+/* --------------------------------------------------------------------------
+   Macronutrient Interactive Donut Chart & Distribution
+   -------------------------------------------------------------------------- */
+.macro-chart-section {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 24px;
+  background: var(--card-bg);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  margin-top: 30px;
+  align-items: center;
+}
+
+.chart-visual-wrap {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+}
+
+.donut-chart-svg {
+  width: 220px;
+  height: 220px;
+  transform: rotate(-90deg);
+}
+
+.donut-chart-center {
+  position: absolute;
+  text-align: center;
+}
+
+.donut-center-title {
+  font-size: 0.78rem;
+  color: var(--text-muted);
+  text-transform: uppercase;
+  font-weight: 700;
+}
+
+.donut-center-kcal {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--text-primary);
+}
+
+.chart-legend-wrap {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+}
+
+.chart-legend-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.legend-item {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 14px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-md);
+  border: 1px solid var(--border-light);
+}
+
+.legend-label-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  font-size: 0.88rem;
+  font-weight: 600;
+}
+
+.legend-color-dot {
+  width: 12px;
+  height: 12px;
+  border-radius: var(--radius-full);
+}
+
+.dot-protein { background: #3b82f6; }
+.dot-carbs { background: #10b981; }
+.dot-fat { background: #f59e0b; }
+
+.legend-val-group {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.legend-pct {
+  font-size: 0.95rem;
+  font-weight: 700;
+}
+
+.legend-g {
+  font-size: 0.8rem;
+  color: var(--text-muted);
+}
+
+/* --------------------------------------------------------------------------
+   Environmental & Carbon Impact Section
+   -------------------------------------------------------------------------- */
+.carbon-impact-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  padding: 32px;
+  margin-top: 30px;
+  position: relative;
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+}
+
+.carbon-header-row {
+  display: flex;
+  align-items: flex-start;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 16px;
+  margin-bottom: 24px;
+}
+
+.carbon-headline-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.carbon-badge-level {
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 700;
+}
+
+.carbon-level-low {
+  background: rgba(16, 185, 129, 0.15);
+  color: var(--emerald-400);
+  border: 1px solid rgba(16, 185, 129, 0.3);
+}
+
+.carbon-level-medium {
+  background: rgba(245, 158, 11, 0.15);
+  color: var(--amber-400);
+  border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
+.carbon-level-high {
+  background: rgba(244, 63, 94, 0.15);
+  color: var(--rose-500);
+  border: 1px solid rgba(244, 63, 94, 0.3);
+}
+
+.carbon-value-display {
+  display: flex;
+  align-items: baseline;
+  gap: 6px;
+}
+
+.carbon-kg-val {
+  font-size: 2.8rem;
+  font-weight: 900;
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.carbon-kg-unit {
+  font-size: 1.1rem;
+  font-weight: 600;
+  color: var(--text-muted);
+}
+
+/* Environmental factors meter */
+.carbon-factors-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 16px;
+  margin: 20px 0;
+}
+
+.carbon-factor-box {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.carbon-factor-title {
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  font-weight: 600;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.carbon-factor-content {
+  font-size: 0.9rem;
+  color: var(--text-primary);
+  font-weight: 500;
+}
+
+.carbon-factors-disclaimer {
+  font-size: 0.82rem;
+  color: var(--text-secondary);
+  background: var(--bg-secondary);
+  border-radius: var(--radius-md);
+  padding: 14px 18px;
+  line-height: 1.5;
+  border-left: 3px solid var(--cyan-400);
+}
+
+.carbon-factors-disclaimer ul {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 12px;
+  margin-top: 8px;
+  list-style: none;
+}
+
+.carbon-factors-disclaimer li {
+  background: var(--bg-tertiary);
+  padding: 3px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.76rem;
+  color: var(--text-secondary);
+}
+
+/* --------------------------------------------------------------------------
+   Daily Calorie Tracker & Dashboard Section
+   -------------------------------------------------------------------------- */
+.tracker-section {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-glass);
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.tracker-grid {
+  display: grid;
+  grid-template-columns: 1fr 1.6fr;
+  gap: 30px;
+}
+
+.daily-summary-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.goal-progress-wrap {
+  text-align: center;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+.goal-ring-svg {
+  width: 200px;
+  height: 200px;
+  transform: rotate(-90deg);
+}
+
+.ring-bg {
+  stroke: var(--bg-tertiary);
+}
+
+.ring-fill {
+  stroke: var(--amber-400);
+  transition: stroke-dashoffset var(--transition-slow);
+}
+
+.goal-center-content {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  text-align: center;
+}
+
+.goal-consumed-kcal {
+  font-size: 2rem;
+  font-weight: 800;
+  font-family: var(--font-display);
+  color: var(--text-primary);
+  line-height: 1;
+}
+
+.goal-remaining-label {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  margin-top: 4px;
+}
+
+.daily-macros-mini-bars {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+}
+
+.mini-macro-item {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.mini-macro-header {
+  display: flex;
+  justify-content: space-between;
+  font-size: 0.8rem;
+  font-weight: 600;
+}
+
+.mini-macro-track {
+  height: 6px;
+  background: var(--bg-tertiary);
+  border-radius: var(--radius-full);
+  overflow: hidden;
+}
+
+.mini-macro-fill {
+  height: 100%;
+  border-radius: var(--radius-full);
+  transition: width var(--transition-slow);
+}
+
+/* Water Tracker Mini Component */
+.water-tracker-card {
+  background: rgba(6, 182, 212, 0.08);
+  border: 1px solid rgba(6, 182, 212, 0.25);
+  border-radius: var(--radius-lg);
+  padding: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.water-info-group {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.water-icon {
+  font-size: 1.8rem;
+  color: var(--cyan-400);
+}
+
+.water-text-val {
+  font-size: 1.1rem;
+  font-weight: 700;
+}
+
+.water-text-sub {
+  font-size: 0.75rem;
+  color: var(--text-secondary);
+}
+
+.add-water-btn {
+  padding: 8px 14px;
+  background: var(--cyan-500);
+  color: white;
+  border-radius: var(--radius-full);
+  font-size: 0.82rem;
+  font-weight: 700;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all var(--transition-fast);
+}
+
+.add-water-btn:hover {
+  background: var(--cyan-400);
+  transform: translateY(-1px);
+}
+
+/* Today's Meals Timeline / List */
+.meals-timeline-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+}
+
+.timeline-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+}
+
+.logged-meals-list {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  max-height: 480px;
+  overflow-y: auto;
+  padding-right: 4px;
+}
+
+.meal-log-item {
+  display: grid;
+  grid-template-columns: 60px 1fr auto auto;
+  align-items: center;
+  gap: 14px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  transition: all var(--transition-fast);
+}
+
+.meal-log-item:hover {
+  border-color: var(--border-accent);
+  background: var(--bg-elevated);
+}
+
+.meal-item-thumb {
+  width: 56px;
+  height: 56px;
+  border-radius: var(--radius-sm);
+  object-fit: cover;
+}
+
+.meal-item-info {
+  display: flex;
+  flex-direction: column;
+  gap: 3px;
+}
+
+.meal-item-title {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.meal-item-meta {
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.meal-item-kcal {
+  font-size: 1.15rem;
+  font-weight: 800;
+  color: var(--amber-400);
+  font-family: var(--font-display);
+}
+
+.delete-meal-btn {
+  width: 32px;
+  height: 32px;
+  border-radius: var(--radius-full);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--text-muted);
+  transition: all var(--transition-fast);
+}
+
+.delete-meal-btn:hover {
+  color: var(--rose-500);
+  background: rgba(244, 63, 94, 0.1);
+}
+
+.empty-meals-placeholder {
+  text-align: center;
+  padding: 40px 20px;
+  color: var(--text-secondary);
+}
+
+.empty-meals-icon {
+  font-size: 2.5rem;
+  margin-bottom: 12px;
+  opacity: 0.6;
+}
+
+/* --------------------------------------------------------------------------
+   Meal History Section
+   -------------------------------------------------------------------------- */
+.history-controls-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 14px;
+  margin-bottom: 24px;
+  background: var(--card-bg);
+  padding: 14px 20px;
+  border-radius: var(--radius-lg);
+  border: 1px solid var(--border-glass);
+}
+
+.history-filter-pills {
+  display: flex;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+.filter-pill {
+  padding: 6px 14px;
+  border-radius: var(--radius-full);
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  font-size: 0.82rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  transition: all var(--transition-fast);
+}
+
+.filter-pill:hover,
+.filter-pill.active {
+  background: var(--emerald-500);
+  color: white;
+  border-color: var(--emerald-500);
+}
+
+.history-actions-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.history-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 20px;
+}
+
+.history-food-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-lg);
+  overflow: hidden;
+  box-shadow: var(--card-shadow);
+  display: flex;
+  flex-direction: column;
+  transition: all var(--transition-fast);
+}
+
+.history-food-card:hover {
+  transform: translateY(-3px);
+  border-color: var(--border-accent);
+}
+
+.history-card-img-wrap {
+  position: relative;
+  height: 160px;
+}
+
+.history-card-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+}
+
+.history-card-badge {
+  position: absolute;
+  top: 10px;
+  left: 10px;
+  background: rgba(15, 23, 42, 0.8);
+  backdrop-filter: blur(6px);
+  padding: 4px 8px;
+  border-radius: var(--radius-sm);
+  font-size: 0.72rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.history-card-body {
+  padding: 16px;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  flex: 1;
+}
+
+.history-card-title {
+  font-size: 1.05rem;
+  font-weight: 700;
+}
+
+.history-card-macros {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  font-size: 0.78rem;
+  color: var(--text-secondary);
+}
+
+.history-card-footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 10px;
+  border-top: 1px solid var(--border-glass);
+  margin-top: auto;
+}
+
+/* --------------------------------------------------------------------------
+   Healthy Eating Guidance & Educational Section
+   -------------------------------------------------------------------------- */
+.guidance-cards-grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: 24px;
+}
+
+.guidance-card {
+  background: var(--card-bg);
+  border: 1px solid var(--border-glass);
+  border-radius: var(--radius-xl);
+  padding: 28px;
+  display: flex;
+  flex-direction: column;
+  gap: 14px;
+  position: relative;
+  transition: transform var(--transition-fast);
+}
+
+.guidance-card:hover {
+  transform: translateY(-3px);
+}
+
+.guidance-icon-wrap {
+  width: 48px;
+  height: 48px;
+  border-radius: var(--radius-md);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.5rem;
+}
+
+.icon-gym { background: rgba(59, 130, 246, 0.15); color: #3b82f6; }
+.icon-student { background: rgba(245, 158, 11, 0.15); color: #f59e0b; }
+.icon-pro { background: rgba(16, 185, 129, 0.15); color: #10b981; }
+
+.guidance-card-title {
+  font-size: 1.2rem;
+  font-weight: 700;
+}
+
+.guidance-card-text {
+  font-size: 0.9rem;
+  color: var(--text-secondary);
+  line-height: 1.5;
+}
+
+.guidance-tips-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  font-size: 0.84rem;
+  color: var(--text-primary);
+}
+
+.guidance-tips-list li {
+  display: flex;
+  align-items: flex-start;
+  gap: 8px;
+}
+
+.guidance-tips-list li::before {
+  content: '✓';
+  color: var(--emerald-400);
+  font-weight: 800;
+}
+
+/* --------------------------------------------------------------------------
+   Goal Setting & Preferences Modal
+   -------------------------------------------------------------------------- */
+.modal-overlay {
+  display: none;
+  position: fixed;
+  inset: 0;
+  z-index: 1000;
+  background: rgba(0, 0, 0, 0.8);
+  backdrop-filter: blur(10px);
+  align-items: center;
+  justify-content: center;
+  padding: 20px;
+}
+
+.modal-overlay.active {
+  display: flex;
+}
+
+.modal-box {
+  background: var(--bg-secondary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-xl);
+  width: 100%;
+  max-width: 520px;
+  box-shadow: 0 25px 60px rgba(0, 0, 0, 0.7);
+  overflow: hidden;
+  max-height: 90vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.modal-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 20px 24px;
+  border-bottom: 1px solid var(--border-glass);
+}
+
+.modal-body {
+  padding: 24px;
+  overflow-y: auto;
+  display: flex;
+  flex-direction: column;
+  gap: 18px;
+}
+
+.form-group {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.form-label {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.form-input {
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-md);
+  padding: 10px 14px;
+  font-size: 0.95rem;
+  color: var(--text-primary);
+  transition: border-color var(--transition-fast);
+}
+
+.form-input:focus {
+  border-color: var(--emerald-400);
+}
+
+.preset-goals-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+}
+
+.preset-goal-btn {
+  padding: 8px 12px;
+  background: var(--bg-tertiary);
+  border: 1px solid var(--border-light);
+  border-radius: var(--radius-sm);
+  font-size: 0.82rem;
+  font-weight: 600;
+  text-align: left;
+  transition: all var(--transition-fast);
+}
+
+.preset-goal-btn:hover {
+  background: var(--bg-elevated);
+  border-color: var(--emerald-400);
+}
+
+.modal-footer {
+  display: flex;
+  align-items: center;
+  justify-content: flex-end;
+  gap: 12px;
+  padding: 16px 24px;
+  border-top: 1px solid var(--border-glass);
+  background: var(--bg-tertiary);
+}
+
+/* --------------------------------------------------------------------------
+   Footer
+   -------------------------------------------------------------------------- */
+.footer {
+  background: var(--bg-secondary);
+  border-top: 1px solid var(--border-glass);
+  padding: 60px 0 30px;
+  margin-top: auto;
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 40px;
+  margin-bottom: 40px;
+}
+
+.footer-brand-desc {
+  font-size: 0.88rem;
+  color: var(--text-secondary);
+  line-height: 1.6;
+  margin-top: 12px;
+  max-width: 320px;
+}
+
+.footer-col-title {
+  font-size: 0.92rem;
+  font-weight: 700;
+  margin-bottom: 16px;
+  color: var(--text-primary);
+}
+
+.footer-links-list {
+  list-style: none;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  font-size: 0.86rem;
+  color: var(--text-secondary);
+}
+
+.footer-links-list a:hover {
+  color: var(--emerald-400);
+}
+
+.footer-bottom {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding-top: 24px;
+  border-top: 1px solid var(--border-glass);
+  font-size: 0.82rem;
+  color: var(--text-muted);
+  flex-wrap: wrap;
+  gap: 12px;
+}
+
+/* --------------------------------------------------------------------------
+   Mobile Bottom Navigation Bar
+   -------------------------------------------------------------------------- */
+.mobile-bottom-nav {
+  display: none;
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  z-index: 90;
+  height: 64px;
+  background: var(--bg-glass);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border-top: 1px solid var(--border-glass);
+  padding: 0 12px;
+}
+
+.mobile-nav-items {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  height: 100%;
+}
+
+.mobile-nav-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  font-size: 0.7rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.mobile-nav-link.active,
+.mobile-nav-link:hover {
+  color: var(--emerald-400);
+}
+
+.mobile-nav-icon {
+  font-size: 1.25rem;
+}
+
+/* --------------------------------------------------------------------------
+   Toast Notifications
+   -------------------------------------------------------------------------- */
+.toast-container {
+  position: fixed;
+  bottom: 24px;
+  right: 24px;
+  z-index: 2000;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+.toast {
+  background: var(--bg-elevated);
+  color: var(--text-primary);
+  border: 1px solid var(--border-light);
+  padding: 12px 18px;
+  border-radius: var(--radius-md);
+  box-shadow: 0 10px 25px rgba(0, 0, 0, 0.4);
+  font-size: 0.88rem;
+  font-weight: 500;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  animation: slideToast 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.toast-success { border-color: var(--emerald-400); }
+.toast-warning { border-color: var(--amber-400); }
+
+@keyframes slideToast {
+  from { transform: translateX(100%); opacity: 0; }
+  to { transform: translateX(0); opacity: 1; }
+}
+
+/* --------------------------------------------------------------------------
+   Responsive Media Queries
+   -------------------------------------------------------------------------- */
+@media (max-width: 1024px) {
+  .hero-grid {
+    grid-template-columns: 1fr;
+    gap: 40px;
+    text-align: center;
+  }
+
+  .hero-content {
+    align-items: center;
+  }
+
+  .hero-desc {
+    margin: 0 auto;
+  }
+
+  .hero-cta-group {
+    justify-content: center;
+  }
+
+  .trust-indicators {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .results-grid-top {
+    grid-template-columns: 1fr;
+  }
+
+  .tracker-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .macro-chart-section {
+    grid-template-columns: 1fr;
+  }
+
+  .guidance-cards-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+@media (max-width: 768px) {
+  .nav-links {
+    display: none;
+  }
+
+  .mobile-menu-btn {
+    display: flex;
+  }
+
+  .mobile-bottom-nav {
+    display: block;
+  }
+
+  body {
+    padding-bottom: 70px;
+  }
+
+  .scanner-options-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .preview-card {
+    grid-template-columns: 1fr;
+  }
+
+  .macro-cards-row {
+    grid-template-columns: 1fr;
+  }
+
+  .nutritional-deep-dive-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .carbon-factors-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .micronutrients-summary-row {
+    grid-template-columns: repeat(2, 1fr);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+  }
+}

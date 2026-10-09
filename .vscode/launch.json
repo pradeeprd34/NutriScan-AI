@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "name": "Launch Standalone (Live)",
+      "type": "chrome",
+      "request": "launch",
+      "file": "${workspaceFolder}/standalone/index.html"
+    },
+    {
+      "name": "Launch App on Port 8080",
+      "type": "chrome",
+      "request": "launch",
+      "url": "http://localhost:8080"
+    }
+  ]
+}

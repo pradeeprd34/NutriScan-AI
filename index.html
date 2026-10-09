@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en" data-theme="dark">
+<head>
+  <meta charset="UTF-8">
+  <link rel="icon" type="image/svg+xml" href="/favicon.svg">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>NutriScan AI — Snap your food. Understand your nutrition.</title>
+  <meta name="description" content="AI-powered food recognition, calorie tracking, macronutrient analysis and carbon footprint estimation.">
+  <meta name="keywords" content="AI food scanner, calorie counter, macro tracker, nutrition calculator, food image analysis, carbon footprint food">
+
+  <!-- Google Fonts: Inter & Outfit -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Outfit:wght@500;600;700;800;900&display=swap" rel="stylesheet">
+</head>
+<body>
+  <div id="root"></div>
+
+  <!-- Vite React Entry Point -->
+  <script type="module" src="/src/main.tsx"></script>
+
+  <!-- Fallback for environments running direct static servers without Vite bundler -->
+  <noscript>
+    <div style="padding: 20px; text-align: center; color: white;">
+      <h2>JavaScript is required to run NutriScan AI.</h2>
+      <p>For a standalone zero-dependency version, open <a href="/standalone/index.html" style="color:#10b981;">standalone/index.html</a>.</p>
+    </div>
+  </noscript>
+  <script>
+    // If not running under Vite or bundler (e.g. direct static server), redirect smoothly to standalone
+    if (window.location.protocol === 'file:' || (window.location.port === '8080' && !window.__vite_plugin_react_preamble_installed__)) {
+      setTimeout(() => {
+        const root = document.getElementById('root');
+        if (root && root.children.length === 0) {
+          window.location.replace('standalone/index.html');
+        }
+      }, 500);
+    }
+  </script>
+</body>
+</html>
